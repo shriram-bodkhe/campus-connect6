@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Domain - Campus Connect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } },
+    };
+  </script>
+</head>
+<body class="bg-gray-100 font-sans flex items-center justify-center h-screen">
+<form method="post" action="/main/home">
+     <div class="bg-white shadow-lg rounded-2xl p-8 max-w-lg w-full text-center">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Select Your Domain</h1>
+    <p class="text-gray-600 mb-8">Please choose your category to continue with Campus Connect.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+      <!-- Option 1 -->
+      <div id="domain-11-12" 
+           class="cursor-pointer border border-gray-200 hover:border-blue-500 hover:shadow-lg rounded-xl p-6 transition">
+        <h2 class="text-lg font-semibold text-gray-700">11th & 12th</h2>
+        <p class="text-sm text-gray-500 mt-2">For higher secondary students</p>
+      </div>
+
+      <!-- Option 2 -->
+      <div id="domain-graduate" 
+           class="cursor-pointer border border-gray-200 hover:border-blue-500 hover:shadow-lg rounded-xl p-6 transition">
+        <h2 class="text-lg font-semibold text-gray-700">Graduate Students</h2>
+        <p class="text-sm text-gray-500 mt-2">For college/university students</p>
+      </div>
+    </div>
+
+    <!-- Continue Button -->
+    <button id="continueBtn" disabled type="submit"
+            class="bg-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-2 px-6 rounded-lg w-full transition">
+            Continue
+     
+    </button>
+  </div>
+</form>
+ 
+
+  <script>
+    let selectedDomain = null;
+    const continueBtn = document.getElementById("continueBtn");
+
+    // Get domain boxes
+    const domain11_12 = document.getElementById("domain-11-12");
+    const domainGraduate = document.getElementById("domain-graduate");
+
+    // Function to select domain
+    function selectDomain(domain, element) {
+      selectedDomain = domain;
+
+      // Reset styles
+      domain11_12.classList.remove("ring-2", "ring-blue-500");
+      domainGraduate.classList.remove("ring-2", "ring-blue-500");
+
+      // Highlight selected
+      element.classList.add("ring-2", "ring-blue-500");
+
+      // Enable button
+      continueBtn.disabled = false;
+    }
+
+    // Event listeners
+    domain11_12.addEventListener("click", () => selectDomain("11-12", domain11_12));
+    domainGraduate.addEventListener("click", () => selectDomain("graduate", domainGraduate));
+
+    // Continue button click
+    continueBtn.addEventListener("click", () => {
+      if (selectedDomain) {
+        alert("You selected: " + selectedDomain);
+        // Example: Redirect based on domain
+        if (selectedDomain === "11-12") {
+          window.location.href = "home_11_12.html";
+        } else {
+          window.location.href = "home_graduate.html";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
